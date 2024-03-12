@@ -31,14 +31,8 @@ jobs:
       run: |
         ls -la ~/bin
 
-    - name: Add to PATH
-      run: |
-        echo "export PATH=\$PATH:~/bin" >> ~/.bashrc
-        source ~/.bashrc
-      shell: bash
-
     - name: Check Installation
       run: |
-        source ~/.bashrc
+        export PATH=$PATH:~/bin
         omni version
       shell: bash
