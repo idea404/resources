@@ -10,29 +10,48 @@ on:
       - main
 
 jobs:
-  test-command:
-    name: Test Install Command
+  test-install:
+    name: Test Unix Install
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-
+        os: [ubuntu-latest, macos-latest]
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
 
     - name: Run Install Command
-      # curl -sSfL https://raw.githubusercontent.com/omni-network/omni/main/scripts/install_omni_cli.sh | sh -s
-      run: |
-        bash scripts/install_omni_cli.sh 
+      run: bash scripts/install_omni_cli.sh
       shell: bash
 
     - name: Confirm Installation Location
-      run: |
-        ls -la ~/bin
+      run: ls -la ~/bin
 
     - name: Check Installation
       run: |
         export PATH=$PATH:~/bin
         omni version
+      shell: bash
+
+  test-prompt:
+    name: Test Windows Prompt
+    runs-on: windows-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Run Install Command
+      run: bash scripts/install_omni_cli.sh || true
+      shell: bash
+
+    - name: Check for Windows Prompt
+      run: |
+        OUTPUT=$(bash scripts/install_omni_cli.sh || true)
+        echo "$OUTPUT"
+        if [[ "$OUTPUT" == *"Please use Ubuntu or macOS to run this script"* ]]; then
+          echo "Correct prompt detected for Windows."
+        else
+          echo "Correct prompt NOT detected for Windows."
+          exit 1
+        fi
       shell: bash
