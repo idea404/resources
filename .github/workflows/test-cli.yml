@@ -26,12 +26,17 @@ jobs:
         curl -sSfL https://raw.githubusercontent.com/omni-network/omni/main/scripts/install_omni_cli.sh | sh -s
       shell: bash
 
+    - name: Confirm Installation Location
+      run: |
+        ls -la ~/bin
+
     - name: Add to PATH
       run: |
         echo "export PATH=\$PATH:~/bin" >> ~/.bashrc
+        source ~/.bashrc
       shell: bash
 
     - name: Check Installation
       run: |
-        omni --version
+        omni version
       shell: bash
