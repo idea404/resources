@@ -39,5 +39,6 @@ jobs:
 
     - name: Check Installation
       run: |
+        source ~/.bashrc
         omni version
       shell: bash
