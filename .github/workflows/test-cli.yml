@@ -24,7 +24,7 @@ jobs:
     - name: Run Install Command
       # curl -sSfL https://raw.githubusercontent.com/omni-network/omni/main/scripts/install_omni_cli.sh | sh -s
       run: |
-        bash ./scripts/install_omni_cli.sh 
+        bash scripts/install_omni_cli.sh 
       shell: bash
 
     - name: Confirm Installation Location
