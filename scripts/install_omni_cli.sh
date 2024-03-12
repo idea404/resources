@@ -23,7 +23,10 @@ echo "ℹ️ Downloading omni from $URL"
 echo "ℹ️ Installing omni to $TARGET"
 mkdir -p "$(dirname "${TARGET}")"
 
-curl -L -s "$URL" | tar -xz -C "$(dirname "${TARGET}")" omni
+# Download and extract omni
+curl -L -s -v "$URL" -o omni.tar.gz
+tar -xzv -C "$(dirname "${TARGET}")" -f omni.tar.gz
+rm omni.tar.gz
 chmod +x "$TARGET"
 
 # Add to PATH if not already there

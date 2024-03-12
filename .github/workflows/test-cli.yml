@@ -22,8 +22,9 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Run Install Command
+      # curl -sSfL https://raw.githubusercontent.com/omni-network/omni/main/scripts/install_omni_cli.sh | sh -s
       run: |
-        curl -sSfL https://raw.githubusercontent.com/omni-network/omni/main/scripts/install_omni_cli.sh | sh -s
+        bash ../../scripts/install_omni_cli.sh 
       shell: bash
 
     - name: Confirm Installation Location
